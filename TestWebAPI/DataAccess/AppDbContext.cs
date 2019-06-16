@@ -9,7 +9,7 @@ namespace DataAccess
 
         }
 
-	public void testFunc()
+	public void testFunc1()
 	{
 	}
     }
