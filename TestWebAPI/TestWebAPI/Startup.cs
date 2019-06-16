@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TestWebAPI.Models;
 
 namespace TestWebAPI
 {
@@ -29,7 +30,10 @@ namespace TestWebAPI
                 .AddXmlSerializerFormatters()
                 .AddXmlDataContractSerializerFormatters();
 
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddDbContextPool<AppDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("MYDBConnection")));
+
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
