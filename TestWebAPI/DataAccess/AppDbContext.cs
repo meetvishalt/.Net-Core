@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,14 +15,7 @@ namespace DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().HasData(
-                new Employee
-                {
-                    Id=1,
-                    Name="Vishal",
-                    Department = "HMT",
-                    Email="Vishal@citiustech.com"
-                });
+            ModelBuilderExtension.Seed(modelBuilder);
         }
         public DbSet<Employee> Employees { get; set; }
         
