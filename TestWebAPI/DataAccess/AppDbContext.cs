@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace DataAccess
 {
@@ -9,8 +13,11 @@ namespace DataAccess
 
         }
 
-	public void testFunc1()
-	{
-	}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            ModelBuilderExtension.Seed(modelBuilder);
+        }
+        public DbSet<Employee> Employees { get; set; }
+        
     }
 }

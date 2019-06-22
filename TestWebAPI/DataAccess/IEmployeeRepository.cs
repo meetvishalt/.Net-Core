@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestWebAPI.Models
+namespace DataAccess
 {
     public interface IEmployeeRepository
     {
         Employee GetEmployee(int id);
 
-        List<Employee> GetAllEmployees();
+        IEnumerable<Employee> GetAllEmployees();
 
         void AddEmployee(Employee emp);
+
+        void UpdateEmployee(Employee emp);
+
+        void DeleteEmployee(int id);
     }
 }

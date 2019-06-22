@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestWebAPI.Models
+namespace DataAccess
 {
     public class MockEmployeeRepository : IEmployeeRepository
     {
@@ -20,7 +20,7 @@ namespace TestWebAPI.Models
             };
         }
 
-        public List<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeeList;
         }
@@ -35,6 +35,24 @@ namespace TestWebAPI.Models
             _employeeList.Add(emp);
         }
 
+        public void UpdateEmployee(Employee emp)
+        {
+            var employee = _employeeList.FirstOrDefault(e => e.Id == emp.Id);
+            
+            if (employee != null)
+            {
+                employee = emp;
+            }
+        }
 
+        public void DeleteEmployee(int id)
+        {
+            var employee = _employeeList.FirstOrDefault(e => e.Id == id);
+
+            if (employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+        }
     }
 }
